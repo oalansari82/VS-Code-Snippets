@@ -1,0 +1,207 @@
+{
+/*
+	 // Place your snippets for PHP here. Each snippet is defined under a snippet name and has a prefix, body and 
+	 // description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+	 // $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. Placeholders with the 
+	 // same ids are connected.
+	 // Example:
+	 "Print to console": {
+		"prefix": "log",
+		"body": [
+			"console.log('$1');",
+			"$2"
+		],
+		"description": "Log output to console"
+	}
+*/
+
+	"Custom Class": {
+		"prefix": "custom_class",
+		"body": [
+			"add_filter( 'body_class', '${1:prefix}_body_class' );",
+			"/**",
+			"* Adds a css class to the body element",
+			"*",
+			"* @param  array \$classes the current body classes",
+			"* @return array \$classes modified classes",
+			"*/",
+			"function ${1:prefix}_body_class( \$classes ) {",
+			"	\$classes[] = '${2:class-name}';",
+			"	return \$classes;",
+			"}",
+		],
+		"description": "Add custom body class in WordPress."
+	},
+	"Register Widget Area": {
+		"prefix": "register_widget_area",
+		"body": [
+			"// Register ${1:my-sidebar} widget area",
+			"genesis_register_widget_area(",
+			"	array(",
+			"		'id'          => '${1:my-sidebar}',",
+			"		'name'        => __( '${2:My Sidebar}', '${4:my-theme-text-domain}' ),",
+			"		'description' => __( '${3:A description of the intended purpose or location}', '${4:my-theme-text-domain}' ),",
+			"	)",
+			");",
+		],
+		"description": "Register a Widget Area in Genesis."
+	},
+	"Display Widget Area": {
+		"prefix": "display_widget_area",
+		"body": [
+			"genesis_widget_area( '${1:after-post}', array(",
+			"	'before'	=> '<div class=\"${1:after-post} widget-area\"><div class=\"wrap\">',",
+			"	'after'		=> '</div></div>',",
+			") );",
+		],
+		"description": "Display a Widget Area in Genesis."
+	},
+	"Enqueue Font Awesome": {
+		"prefix": "font_awesome",
+		"body": [
+			"wp_enqueue_style( 'font-awesome', '//maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css' );",
+		],
+		"description": "Enqueue Font Awesome"
+	},
+	"Force full width": {
+		"prefix": "full_width",
+		"body": [
+			"// Force full width content",
+			"add_filter( 'genesis_pre_get_option_site_layout', '__genesis_return_full_width_content' );",
+		],
+		"description": "Force full width"
+	},
+	"Custom Loop": {
+		"prefix": "loop",
+		"body": [
+			"remove_action( 'genesis_loop', 'genesis_do_loop' );",
+			"add_action( 'genesis_loop', '${1:prefix}_do_loop' );",
+			"/**",
+			"* Outputs a custom loop",
+			"*",
+			"* @global mixed \$paged current page number if paginated",
+			"* @return void",
+			"*/",
+			"function ${1:prefix}_do_loop() {",
+			"",
+			"	global \$paged;",
+			"",
+			"	// accepts any wp_query args",
+			"	\$args = (array(",
+			"		${2:'post_type'      => '',",
+			"		'category_name'  => 'blog', // use category slug",
+			"		'order'          => 'ASC',",
+			"		'orderby'       => 'title',",
+			"		'paged'          => \$paged,",
+			"		'posts_per_page' => 5}",
+			"		));",
+			"",
+			"	genesis_custom_loop( \$args );",
+			"}",
+		],
+		"description": "Custom Genesis Loop"
+	},
+	"Footer Credits": {
+		"prefix": "footer_credits",
+		"body": [
+			"// Change the footer text",
+			"// http://my.studiopress.com/docs/shortcode-reference/#footer-shortcodes",
+			"add_filter( 'genesis_footer_creds_text', '${2:sp_footer_creds_filter}' );",
+			"function ${2:sp_footer_creds_filter}( \$creds ) {",
+			"	\$creds = '$1[footer_copyright] &middot; <a href=\"http://mydomain.com\">My Custom Link</a> &middot; Built on the <a href=\"http://www.studiopress.com/themes/genesis\" title=\"Genesis Framework\">Genesis Framework</a>';",
+			"	return \$creds;",
+			"}",
+		],
+		"description": "Customize Footer Credits in Genesis"
+	},
+	"Remove Site Description": {
+		"prefix": "remove_site_description",
+		"body": [
+			"// Add class for screen readers to site description",
+			"add_filter( 'genesis_attr_site-description', 'genesis_attributes_screen_reader_class' );",
+		],
+		"description": "Remove Tagline (Site Description) in Genesis"
+	},
+	"Customize Entry Meta": {
+		"prefix": "entry_meta_customize",
+		"body": [
+			"// Customize entry meta in the entry footer",
+			"// http://my.studiopress.com/docs/shortcode-reference/#post-shortcodes",
+			"add_filter( 'genesis_post_meta', '${2:sp_post_meta_filter}' );",
+			"function ${2:sp_post_meta_filter}( \$post_meta ) {",
+			"	\$post_meta = '$1[post_categories before=\"Filed Under: \"] [post_tags before=\"Tagged: \"]';",
+			"	return \$post_meta;",
+			"}",
+		],
+		"description": "Modify entry meta in the entry footer in Genesis"
+	},
+	"Modify Post Info": {
+		"prefix": "post_info_modify",
+		"body": [
+			"// Customize entry meta in the entry header",
+			"add_filter( 'genesis_post_info', '${2:sp_post_info_filter}' );",
+			"function ${2:sp_post_info_filter}( \$post_info ) {",
+			"	\$post_info = '$1[post_date] by [post_author_posts_link] [post_comments] [post_edit]';",
+			"	return \$post_info;",
+			"}",
+		],
+		"description": "Modify post info in the entry header in Genesis"
+	},
+	"Add Nav Extras": {
+		"prefix": "nav_extras_add",
+		"body": [
+			"add_filter( 'wp_nav_menu_items', 'theme_menu_extras', 10, 2 );",
+			"/**",
+			"* Filter menu items, appending either a search form or today's date.",
+			"*",
+			"* @param string   \$menu HTML string of list items.",
+			"* @param stdClass \$args Menu arguments.",
+			"*",
+			"* @return string Amended HTML string of list items.",
+			"*/",
+			"function theme_menu_extras( \$menu, \$args ) {",
+			"	// Change 'primary' to 'secondary' to add extras to the secondary navigation menu",
+			"	if ( 'primary' !== \$args->theme_location )",
+			"		return \$menu;",
+			"",
+			"	// Uncomment this block to add a search form to the navigation menu",
+			"	/*",
+			"	ob_start();",
+			"	get_search_form();",
+			"	\$search = ob_get_clean();",
+			"	\$menu  .= '<li class=\"right search\">' . \$search . '</li>';",
+			"	*/",
+			"",
+			"	// Uncomment this block to add the date to the navigation menu",
+			"	/*",
+			"	\$menu .= '<li class=\"right date\">' . date_i18n( get_option( 'date_format' ) ) . '</li>';",
+			"	*/",
+			"",
+			"	return \$menu;",
+			"}",
+		],
+		"description": "Add Nav Extras in WordPress"
+	},
+	"Tempalate Redirect": {
+		"prefix": "template_redirect",
+		"body": [
+			"/**",
+			"* Template Redirect",
+			"* Use ${1:template_category-grid.php} for ${2:recipes category archive}.",
+			"*/",
+			"add_filter( 'template_include', '${3:custom_category_template}', 99 );",
+			"function ${3:custom_category_template}( \$template ) {",
+			"",
+			"	if ( ${4:is_category( 'recipes' )} ) {",
+			"		\$new_template = locate_template( array( '${1:template_category-grid.php}' ) );",
+			"		if ( '' != \$new_template ) {",
+			"			return \$new_template ;",
+			"		}",
+			"	}",
+			"",
+			"	return \$template;",
+			"}",
+		],
+		"description": "Template Redirect in WordPress"
+	},
+}
