@@ -1,4 +1,4 @@
-This document and a live document which will be updated regularly. 
+This document is a live document which will be updated regularly. 
 
 # Genesis Snippets
 
