@@ -1,4 +1,4 @@
-This document is a live document which will be updated regularly. 
+> This document is a live document which will be updated regularly. 
 
 # Genesis Snippets
 
@@ -18,4 +18,4 @@ All you have to do is type what you want and auto-complete will show you the sug
 
 ## Credits 
 
-<a href="http://my.studiopress.com/snippets/">StudioPress</a>, <a href="https://github.com/GaryJones/sublime/tree/master/snippets">Gary Jones</a>, <a href="http://www.billerickson.net/code/">Bill Erickson</a>, <a href="https://github.com/srikat/Genesis">Sridhar Katakam</a>
+[StudioPress](http://my.studiopress.com/snippets/), [Gary Jones](https://github.com/GaryJones/sublime/tree/master/snippets), [Bill Erickson](http://www.billerickson.net/code/), [Sridhar Katakam](https://github.com/srikat/Genesis)
